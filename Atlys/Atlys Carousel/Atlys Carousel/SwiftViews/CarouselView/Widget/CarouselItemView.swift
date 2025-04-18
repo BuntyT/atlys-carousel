@@ -23,7 +23,6 @@ struct CarouselItemView<Content: View>: View {
                 .cornerRadius(20)
                 .scaleEffect(scale)
                 .onChange(of: frame) { _ in
-                    // Update current index when item is mostly visible
                     if visibleRatio > 0.5 && currentIndex != index {
                         currentIndex = index
                     }
@@ -31,7 +30,6 @@ struct CarouselItemView<Content: View>: View {
         }
     }
 
-    // Calculate scale based on item's distance from screen center
     private func calculateScale(frame: CGRect) -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
         let screenCenter = screenWidth / 2
@@ -40,7 +38,6 @@ struct CarouselItemView<Content: View>: View {
         return max(0.9, 1 - (distance / screenWidth) * 0.3)
     }
 
-    // Calculate the ratio of the item's visible width
     private func calculateVisibleRatio(frame: CGRect) -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
         let visibleMinX = max(frame.minX, 0)
